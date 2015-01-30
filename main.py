@@ -38,7 +38,8 @@ lcd.message('EGT: ')
 while True:
     temp = c_to_f(sensor.readTempC())
 
-    if not math.isnan(temp) or temp < 0:
+   # if not math.isnan(temp) or temp < 0:
+    if not temp < 0:
 
         curs.execute("INSERT INTO temps values(time('now'), (?))", (temp,))
         conn.commit()
@@ -57,5 +58,6 @@ while True:
 
     if lcd.is_pressed(DOWN):
         conn.close()
+	lcd.set_backlight(False)
         os.system("sudo shutdown -h now")
 
