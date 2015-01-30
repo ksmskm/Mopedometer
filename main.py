@@ -1,3 +1,4 @@
+import sys
 import time
 import math
 import sqlite3
@@ -21,11 +22,19 @@ setPoint = 80
 conn = sqlite3.connect('test.db')
 curs = conn.cursor()
 
+# Prep LCD
+# Char LCD plate button names.
+SELECT                  = 0
+RIGHT                   = 1
+DOWN                    = 2
+UP                      = 3
+LEFT                    = 4
+
 # Initialize the LCD using the pins
 lcd = LCD.Adafruit_CharLCDPlate()
 lcd.message('EGT: ')
 
-# Loop printing measurements every second.
+# Loop printing measurements every second until DOWN button pressed.
 while True:
         temp = c_to_f(sensor.readTempC())
 
@@ -38,12 +47,16 @@ while True:
                 lcd.message('{:12.0f}'.format(temp))
 
                 if temp >= setPoint:
-			for i in range(5):
+			for i in range(10):
 				 lcd.set_color(1.0, 0.0, 0.0)
 				 time.sleep(0.02)
                        		 lcd.set_color(0.0, 0.0, 0.0)
 		else:
                 	lcd.set_color(1.0, 1.0, 1.0)
-			time.sleep(0.5)
+			time.sleep(0.2)
 
-conn.close()
+		if lcd.is_pressed(DOWN):
+			conn.close()
+			lcd.enable_display(False)
+			sys.exit()
+
