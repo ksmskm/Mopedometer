@@ -1,8 +1,9 @@
-import Adafruit_CharLCD as LCD
 import time
 import math
-import Adafruit_GPIO.SPI as SPI
+import sqlite3
 import MAX31855
+import Adafruit_GPIO.SPI as SPI
+import Adafruit_CharLCD as LCD
 
 # Define a function to convert celsius to fahrenheit.
 def c_to_f(c):
@@ -13,8 +14,12 @@ SPI_PORT   = 0
 SPI_DEVICE = 0
 sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
-#Overheat threshold point
+# Overheat threshold point
 setPoint = 80
+
+# Prep database 
+conn = sqlite3.connect('test.db')
+curs = conn.cursor()
 
 # Initialize the LCD using the pins
 lcd = LCD.Adafruit_CharLCDPlate()
@@ -25,6 +30,9 @@ while True:
         temp = c_to_f(sensor.readTempC())
 
         if not math.isnan(temp) or temp < 0:
+		
+		curs.execute("INSERT INTO temps values(time('now'), (?))", (temp,))
+		conn.commit()
 
                 lcd.set_cursor(4, 0)
                 lcd.message('{:12.0f}'.format(temp))
@@ -37,3 +45,5 @@ while True:
 		else:
                 	lcd.set_color(1.0, 1.0, 1.0)
 			time.sleep(0.5)
+
+conn.close()
