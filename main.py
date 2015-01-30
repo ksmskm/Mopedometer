@@ -24,12 +24,12 @@ lcd.message('EGT: ')
 while True:
         temp = c_to_f(sensor.readTempC())
 
-        if not (math.isnan(temp) or temp < 0):
+        if not math.isnan(temp) or temp < 0:
 
                 lcd.set_cursor(4, 0)
                 lcd.message('{:12.0f}'.format(temp))
 
-                if (temp >= setPoint):
+                if temp >= setPoint:
 			for i in range(5):
 				 lcd.set_color(1.0, 0.0, 0.0)
 				 time.sleep(0.02)
