@@ -33,6 +33,7 @@ LEFT                    = 4
 # Initialize the LCD using the pins
 lcd = LCD.Adafruit_CharLCDPlate()
 
+<<<<<<< HEAD
 # Log & Display Exhaust Gas Temps. DOWN button to SHUTDOWN.
 lcd.message('EGT: ')
 while True:
@@ -60,4 +61,33 @@ while True:
         conn.close()
 	lcd.set_backlight(False)
         os.system("sudo shutdown -h now")
+=======
+while not lcd.is_pressed(UP):
+    # Log & Display Exhaust Gas Temps. DOWN button to SHUTDOWN.
+    lcd.message('EGT: ')
+    while not lcd.is_pressed(DOWN):
+        temp = c_to_f(sensor.readTempC())
+
+        if not math.isnan(temp) or temp < 0:
+
+            curs.execute("INSERT INTO temps values(time('now'), (?))", (temp,))
+            conn.commit()
+
+            lcd.set_cursor(4, 0)
+            lcd.message('{:12.0f}'.format(temp))
+
+            if temp >= setPoint:
+                for i in range(10):
+                     lcd.set_color(1.0, 0.0, 0.0)
+                     time.sleep(0.02)
+                     lcd.set_color(0.0, 0.0, 0.0)
+            else:
+                lcd.set_color(1.0, 1.0, 1.0)
+                time.sleep(0.2)
+
+    conn.close()
+    lcd.clear()
+    lcd.set_backlight(False)
+    os.system("sudo shutdown -h now")
+>>>>>>> af36630a28393f06f397e42a762d00546ef53af5
 
