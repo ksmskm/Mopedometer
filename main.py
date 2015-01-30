@@ -33,7 +33,7 @@ LEFT                    = 4
 # Initialize the LCD using the pins
 lcd = LCD.Adafruit_CharLCDPlate()
 
-while not lcd.is_pressed(UP):
+while lcd.is_pressed(UP):
     # Log & Display Exhaust Gas Temps. DOWN button to SHUTDOWN.
     lcd.message('EGT: ')
     while not lcd.is_pressed(DOWN):
