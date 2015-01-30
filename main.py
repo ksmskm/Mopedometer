@@ -16,7 +16,7 @@ SPI_DEVICE = 0
 sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 # Overheat threshold point
-setPoint = 80
+setPoint = 1000
 
 # Prep database 
 conn = sqlite3.connect('test.db')
