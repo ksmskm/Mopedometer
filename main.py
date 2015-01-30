@@ -1,4 +1,4 @@
-import sys
+import os
 import time
 import math
 import sqlite3
@@ -8,7 +8,7 @@ import Adafruit_CharLCD as LCD
 
 # Define a function to convert celsius to fahrenheit.
 def c_to_f(c):
-        return c * 9.0 / 5.0 + 32.0
+    return c * 9.0 / 5.0 + 32.0
 
 # Raspberry Pi hardware SPI configuration.
 SPI_PORT   = 0
@@ -32,31 +32,30 @@ LEFT                    = 4
 
 # Initialize the LCD using the pins
 lcd = LCD.Adafruit_CharLCDPlate()
+
+# Log & Display Exhaust Gas Temps. DOWN button to SHUTDOWN.
 lcd.message('EGT: ')
-
-# Loop printing measurements every second until DOWN button pressed.
 while True:
-        temp = c_to_f(sensor.readTempC())
+    temp = c_to_f(sensor.readTempC())
 
-        if not math.isnan(temp) or temp < 0:
-		
-		curs.execute("INSERT INTO temps values(time('now'), (?))", (temp,))
-		conn.commit()
+    if not math.isnan(temp) or temp < 0:
 
-                lcd.set_cursor(4, 0)
-                lcd.message('{:12.0f}'.format(temp))
+        curs.execute("INSERT INTO temps values(time('now'), (?))", (temp,))
+        conn.commit()
 
-                if temp >= setPoint:
-			for i in range(10):
-				 lcd.set_color(1.0, 0.0, 0.0)
-				 time.sleep(0.02)
-                       		 lcd.set_color(0.0, 0.0, 0.0)
-		else:
-                	lcd.set_color(1.0, 1.0, 1.0)
-			time.sleep(0.2)
+        lcd.set_cursor(4, 0)
+        lcd.message('{:12.0f}'.format(temp))
 
-		if lcd.is_pressed(DOWN):
-			conn.close()
-			lcd.enable_display(False)
-			sys.exit()
+        if temp >= setPoint:
+            for i in range(10):
+                 lcd.set_color(1.0, 0.0, 0.0)
+                 time.sleep(0.02)
+                 lcd.set_color(0.0, 0.0, 0.0)
+        else:
+            lcd.set_color(1.0, 1.0, 1.0)
+            time.sleep(0.2)
+
+    if lcd.is_pressed(DOWN):
+        conn.close()
+        os.system("sudo shutdown -h now")
 
