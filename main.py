@@ -41,7 +41,7 @@ while True:
             temp = c_to_f(sensor.readTempC())
 
             # rudimentary protection against input noise
-            if not math.isnan(temp) or temp < 0:
+            if not temp < 0:
 
                 curs.execute("INSERT INTO temps values(time('now'), (?))", (temp,))
                 conn.commit()
