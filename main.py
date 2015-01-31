@@ -32,7 +32,7 @@ lcd = LCD.Adafruit_CharLCDPlate()
 
 while True:
     if lcd.is_pressed(UP):
-
+        runLogging = True           
         # Prep database 
         conn = sqlite3.connect('test.db')
         curs = conn.cursor()
@@ -41,7 +41,7 @@ while True:
         lcd.message('EGT: ')
         lcd.set_cursor(0, 1)
         lcd.message('MAX: ')
-        while True:
+        while runLogging:
             temp = c_to_f(sensor.readTempC())
             if temp > maxTemp:
                 maxTemp = temp
@@ -66,8 +66,8 @@ while True:
                     lcd.set_color(1.0, 1.0, 1.0)
                     time.sleep(0.2)
 
-        if lcd.is_pressed(DOWN):
-            conn.close()
-            lcd.clear()
-            lcd.set_backlight(False)
-            break
+            if lcd.is_pressed(DOWN):
+                conn.close()
+                lcd.clear()
+                lcd.set_backlight(False)
+                runLogging = False
