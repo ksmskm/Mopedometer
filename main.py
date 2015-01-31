@@ -16,16 +16,8 @@ SPI_DEVICE = 0
 sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 # Overheat threshold point
-<<<<<<< HEAD
-setPoint = 1000
-
-# Prep database 
-conn = sqlite3.connect('test.db')
-curs = conn.cursor()
-=======
 setPoint = 80
 maxTemp = float("-inf")
->>>>>>> 47fc040695e2bc5a32a835a78740ab8e2daaaa26
 
 # Prep LCD
 # Char LCD plate button names.
@@ -57,11 +49,7 @@ while True:
                 lcd.message('{:12.0f}'.format(temp))
 
             # rudimentary protection against input noise
-<<<<<<< HEAD
-            if not temp < 0:
-=======
             if not math.isnan(temp) and temp >= 0:
->>>>>>> 47fc040695e2bc5a32a835a78740ab8e2daaaa26
 
                 curs.execute("INSERT INTO temps values(time('now'), (?))", (temp,))
                 conn.commit()
@@ -78,14 +66,8 @@ while True:
                     lcd.set_color(1.0, 1.0, 1.0)
                     time.sleep(0.2)
 
-<<<<<<< HEAD
-        conn.close()
-        lcd.clear()
-        lcd.set_backlight(False)
-        os.system("sudo shutdown -h now")
-=======
         if lcd.is_pressed(DOWN):
             conn.close()
             lcd.clear()
             lcd.set_backlight(False)
->>>>>>> 47fc040695e2bc5a32a835a78740ab8e2daaaa26
+            break
