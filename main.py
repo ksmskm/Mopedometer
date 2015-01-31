@@ -70,3 +70,4 @@ while True:
             conn.close()
             lcd.clear()
             lcd.set_backlight(False)
+            break
