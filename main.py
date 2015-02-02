@@ -65,6 +65,9 @@ def main():
                         lcd.set_color(1.0, 1.0, 1.0)
                         time.sleep(0.2)
                 else:
+                    lcd.set_cursor(4, 0)
+                    lcd.message('{:12.0f}'.format(temp))
+                    
                     time.sleep(0.2)     
 
                 # DOWN button to stop logging.
