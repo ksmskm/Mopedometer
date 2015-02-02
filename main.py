@@ -52,18 +52,20 @@ def main():
                     lcd.set_cursor(4, 0)
                     lcd.message('{:12.0f}'.format(temp))
 
-                # update/display max temperature
-                if temp > maxTemp:
-                    maxTemp = temp
-                    lcd.set_cursor(0, 1)
-                    lcd.message('{:12.0f}'.format(maxTemp))
+                    # update/display max temperature
+                    if temp > maxTemp:
+                        maxTemp = temp
+                        lcd.set_cursor(0, 1)
+                        lcd.message('{:12.0f}'.format(maxTemp))
 
-                # alert if temp goes over a set point.
-                if temp >= setPoint:
-                    flashLCD(10, .02) 
+                    # alert if temp goes over a set point.
+                    if temp >= setPoint:
+                        flashLCD(10, .02) 
+                    else:
+                        lcd.set_color(1.0, 1.0, 1.0)
+                        time.sleep(0.2)
                 else:
-                    lcd.set_color(1.0, 1.0, 1.0)
-                    time.sleep(0.2)
+                    time.sleep(0.2)     
 
                 # DOWN button to stop logging.
                 if lcd.is_pressed(DOWN):
