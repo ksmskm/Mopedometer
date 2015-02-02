@@ -6,20 +6,14 @@ import MAX31855
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_CharLCD as LCD
 
-# Define a function to convert celsius to fahrenheit.
-def c_to_f(c):
-    return c * 9.0 / 5.0 + 32.0
-
-# Raspberry Pi hardware SPI configuration.
+# Raspberry Pi hardware SPI configuration (from Adafruit MAX31855).
 SPI_PORT   = 0
 SPI_DEVICE = 0
 sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
-# Overheat threshold point
+# Overheat point (A relatively static value in application)
 setPoint = 80
-maxTemp = float("-inf")
 
-# Prep LCD
 # Char LCD plate button names.
 SELECT                  = 0
 RIGHT                   = 1
@@ -30,44 +24,63 @@ LEFT                    = 4
 # Initialize the LCD using the pins
 lcd = LCD.Adafruit_CharLCDPlate()
 
-while True:
-    if lcd.is_pressed(UP):
-        lcd.set_backlight(True)
-        runLogging = True           
-        # Prep database 
-        conn = sqlite3.connect('test.db')
-        curs = conn.cursor()
+def main():
+    while True:
+        if lcd.is_pressed(UP):
+            runLogging = True                       
+            maxTemp = float("-inf")
 
-        # Log & Display Exhaust Gas Temps. DOWN button to SHUTDOWN.
-        lcd.message('EGT: ')
-        lcd.set_cursor(0, 1)
-        lcd.message('MAX: ')
-        while runLogging:
-            temp = c_to_f(sensor.readTempC())
-            if temp > maxTemp:
-                maxTemp = temp
-                lcd.set_cursor(0, 1)
-                lcd.message('{:12.0f}'.format(temp))
+            # Prep database 
+            conn = sqlite3.connect('test.db')
+            curs = conn.cursor()
 
-            # rudimentary protection against input noise
-            if not math.isnan(temp) and temp >= 0:
+            # prep display
+            lcd.message('EGT: ')
+            lcd.set_cursor(0, 1)
+            lcd.message('MAX: ')
 
-                curs.execute("INSERT INTO temps values(time('now'), (?))", (temp,))
+            # Log & Display Exhaust Gas Temps.            
+            while runLogging:
+                temp = c_to_f(sensor.readTempC())
+
+                sqlString = "INSERT INTO temps values(time('now'), (?))"
+                curs.execute(sqlString, (temp,))
                 conn.commit()
 
-                lcd.set_cursor(4, 0)
-                lcd.message('{:12.0f}'.format(temp))
+                # display clean data & not noise.
+                if not math.isnan(temp) and temp >= 0:
+                    lcd.set_cursor(4, 0)
+                    lcd.message('{:12.0f}'.format(temp))
 
+                # update/display max temperature
+                if temp > maxTemp:
+                    maxTemp = temp
+                    lcd.set_cursor(0, 1)
+                    lcd.message('{:12.0f}'.format(maxTemp))
+
+                # alert if temp goes over a set point.
                 if temp >= setPoint:
-                    for i in range(10):
-                         lcd.set_color(1.0, 0.0, 0.0)
-                         time.sleep(0.02)
-                         lcd.set_color(0.0, 0.0, 0.0)
+                    flashLCD(10, .02) 
                 else:
                     lcd.set_color(1.0, 1.0, 1.0)
                     time.sleep(0.2)
-	    if lcd.is_pressed(DOWN):
-        	conn.close()
-                lcd.clear()
-                lcd.set_backlight(False)
-                runLogging = False
+
+                # DOWN button to stop logging.
+                if lcd.is_pressed(DOWN):
+                    conn.close()
+                    lcd.clear()
+                    lcd.set_backlight(False)
+                    runLogging = False
+
+# Convert celsius to fahrenheit.
+def c_to_f(c):
+    return c * 9.0 / 5.0 + 32.0
+
+def flashLCD(times, duration):
+    for i in range(times):
+        lcd.set_color(1.0, 0.0, 0.0)
+        time.sleep(duration)
+        lcd.set_color(0.0, 0.0, 0.0)
+
+if name == __main__ :
+    main()
