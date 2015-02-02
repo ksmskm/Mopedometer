@@ -82,5 +82,5 @@ def flashLCD(times, duration):
         time.sleep(duration)
         lcd.set_color(0.0, 0.0, 0.0)
 
-if name == __main__ :
+if __name__ == "__main__":
     main()
