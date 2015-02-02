@@ -73,7 +73,7 @@ def main():
 
                 # DOWN button to stop logging.
                 if lcd.is_pressed(DOWN):
-		    conn.close()
+		            conn.close()
                     lcd.clear()
                     lcd.set_backlight(False)
                     runLogging = False
