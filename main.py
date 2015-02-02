@@ -27,7 +27,6 @@ lcd = LCD.Adafruit_CharLCDPlate()
 def main():
     while True:
         if lcd.is_pressed(UP):
-	    print "UP"
             runLogging = True                       
             maxTemp = float("-inf")
 
@@ -74,7 +73,6 @@ def main():
 
                 # DOWN button to stop logging.
                 if lcd.is_pressed(DOWN):
-                    print "DOWN"
 		    conn.close()
                     lcd.clear()
                     lcd.set_backlight(False)
