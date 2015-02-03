@@ -1,3 +1,7 @@
+# byte code for convenience/experimentation
+import sys
+sys.dont_write_bytecode = True
+
 import os
 import time
 import math
