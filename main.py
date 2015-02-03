@@ -6,13 +6,13 @@ import MAX31855
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_CharLCD as LCD
 
-# Raspberry Pi hardware SPI configuration (from Adafruit MAX31855).
+# Raspberry Pi hardware SPI configuration.
 SPI_PORT   = 0
 SPI_DEVICE = 0
 sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
 # Overheat point (A relatively static value in application)
-setPoint = 80
+setPoint = 1100
 
 # Char LCD plate button names.
 SELECT                  = 0
@@ -44,6 +44,7 @@ def main():
             while runLogging:
                 temp = c_to_f(sensor.readTempC())
 
+                # Query SQL DB 'temps'
                 sqlString = "INSERT INTO temps values(time('now'), (?))"
                 curs.execute(sqlString, (temp,))
                 conn.commit()
@@ -53,23 +54,18 @@ def main():
                     lcd.set_cursor(4, 0)
                     lcd.message('{:12.0f}'.format(temp))
 
-                    # update/display max temperature
-                    if temp > maxTemp:
-                        maxTemp = temp
-                        lcd.set_cursor(0, 1)
-                        lcd.message('{:12.0f}'.format(maxTemp))
+                # update/display max temperature
+                if temp > maxTemp:
+                    maxTemp = temp
+                    lcd.set_cursor(0, 1)
+                    lcd.message('{:12.0f}'.format(maxTemp))
 
-                    # alert if temp goes over a set point.
-                    if temp >= setPoint:
-                        flashLCD(10, .02) 
-                    else:
-                        lcd.set_color(1.0, 1.0, 1.0)
-                        time.sleep(0.2)
+                # alert if temp goes over a set point.
+                if temp >= setPoint:
+                    flashLCD(10, .02) 
                 else:
-                    lcd.set_cursor(4, 0)
-                    lcd.message('{:12.0f}'.format(temp))
-                    
-                    time.sleep(0.2)     
+                    lcd.set_color(1.0, 1.0, 1.0)
+                    time.sleep(0.2)
 
                 # DOWN button to stop logging.
                 if lcd.is_pressed(DOWN):
