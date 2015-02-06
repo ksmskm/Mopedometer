@@ -1,21 +1,29 @@
-# Mopedometer
+Adafruit Python MAX31855
+========================
 
-A Raspberry Pi based data display & logger. Relies heavily on Adafruit products & libraries. Primarily designed to gather temperature data on Moped engines.
+Python library for accessing the MAX31855 thermocouple temperature sensor on a Raspberry Pi or Beaglebone Black.
 
-## Current status
+Designed specifically to work with the Adafruit MAX31855 sensor ----> https://www.adafruit.com/products/269
 
-Exhaust Gas Temp. sensor, display & logging is working.
+To install, first make sure some dependencies are available by running the following commands (on a Raspbian
+or Beaglebone Black Debian install):
 
-Working on improving program interactivity and data logging organization.
+````
+sudo apt-get update
+sudo apt-get install build-essential python-dev python-smbus
+````
 
-Still heavily wired :(
+Then download the library by clicking the download zip link to the right and unzip the archive somewhere on your Raspberry Pi or Beaglebone Black.  Then execute the following command in the directory of the library:
 
-## Goal
+````
+sudo python setup.py install
+````
 
-User friendly dash mounted Mopedometer with a minimum of wires (hint: wifi connectivity & database server)
+Make sure you have internet access on the device so it can download the required dependencies.
 
-## Links
+See examples of usage in the examples folder.
 
-[Thermocouple Library](https://learn.adafruit.com/max31855-thermocouple-python-library)
+Adafruit invests time and resources providing this open source code, please support Adafruit and open-source hardware by purchasing products from Adafruit!
 
-[Display Library](https://learn.adafruit.com/rgb-lcd-shield)
+Written by Tony DiCola for Adafruit Industries.
+MIT license, all text above must be included in any redistribution
