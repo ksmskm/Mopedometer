@@ -49,7 +49,7 @@ def main():
                 temp = c_to_f(sensor.readTempC())
 
                 # Query SQL DB 'temps'
-                sqlString = "INSERT INTO temps values(time('now'), (?))"
+                sqlString = "INSERT INTO temps values(datetime('now'), (?))"
                 curs.execute(sqlString, (temp,))
                 conn.commit()
 
