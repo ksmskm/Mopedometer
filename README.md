@@ -26,6 +26,6 @@ User friendly dash mounted Mopedometer with a minimum of wires (hint: wifi conne
 
 [Thermocouple Library](https://learn.adafruit.com/max31855-thermocouple-python-library)
 
-[Analog-to-Digital Docs](https://gist.github.com/ladyada/3151375)
+[Analog-to-Digital resources](https://gist.github.com/ladyada/3151375)
 
 [Display Library](https://learn.adafruit.com/rgb-lcd-shield)
