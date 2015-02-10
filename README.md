@@ -6,7 +6,10 @@ A Raspberry Pi based data display & logger. Relies heavily on Adafruit products 
 
 Exhaust Gas Temp. sensor, display & logging is working.
 
-Working on improving program interactivity and data logging organization.
+TODO list:
+0. integrating a thermistor to monitor cylinder head temp. requires logarthmic curve tuning in software & an analog to digital converter integrated circuit.
+1. restructure modules & organize program to run completely of onboard buttons & power switch.
+2. beef up data visualization capabilities.
 
 Still heavily wired :(
 
@@ -17,5 +20,7 @@ User friendly dash mounted Mopedometer with a minimum of wires (hint: wifi conne
 ## Links
 
 [Thermocouple Library](https://learn.adafruit.com/max31855-thermocouple-python-library)
+
+[Analog-to-Digital Docs](https://gist.github.com/ladyada/3151375)
 
 [Display Library](https://learn.adafruit.com/rgb-lcd-shield)
