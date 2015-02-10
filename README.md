@@ -7,6 +7,7 @@ A Raspberry Pi based data display & logger. Relies heavily on Adafruit products 
 Exhaust Gas Temp. sensor, display & logging is working.
 
 TODO list:
+
 0. integrating a thermistor to monitor cylinder head temp. requires logarthmic curve tuning in software & an analog to digital converter integrated circuit.
 
 1. restructure modules & organize program to run completely of onboard buttons & power switch.
