@@ -4,7 +4,7 @@ A Raspberry Pi based data display & logger. Relies heavily on Adafruit products 
 
 ## Current status
 
-Exhaust Gas Temp. sensor, display & logging is working.
+Exhaust Gas Temp. sensor, display, logging & server are working. topics are being worked on as available parts & schedule permit.
 
 TODO list:
 
@@ -14,11 +14,13 @@ TODO list:
 
 2. beef up data visualization capabilities.
 
+3. integrate Realtime-Clock to improve data logging.
+
 Still heavily wired :(
 
 ## Goal
 
-User friendly dash mounted Mopedometer with a minimum of wires (hint: wifi connectivity & database server)
+User friendly dash mounted Mopedometer with a minimum of wires (hint: wifi connectivity & database server with graphing support)
 
 ## Links
 
