@@ -42,6 +42,10 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         adcout >>= 1       # first bit is 'null' so drop it
         return adcout
 
+# Convert celsius to fahrenheit.
+def c_to_f(c):
+    return c * 9.0 / 5.0 + 32.0
+
 #thermistor reading function
 def temp_get(value):
     volts = (value * 3.3) / 1024 #calculate the voltage
@@ -72,7 +76,7 @@ def temp_get(value):
     # the -4 is error correction for bad python math
 
     #print out info
-    print ("%4d/1023 => %5.3f V => %4.1f ohm => %4.1f K => %4.1f C" % (value, volts, ohms, temp, tempc))
+    #print ("%4d/1023 => %5.3f V => %4.1f ohm => %4.1f K => %4.1f C" % (value, volts, ohms, temp, tempc))
     return tempc
 
 # change these as desired - they're the pins connected from the
@@ -92,13 +96,13 @@ GPIO.setup(SPICS, GPIO.OUT)
 potentiometer_adc = 0;
 
 while True:
-        # we'll assume that the pot didn't move
-        trim_pot_changed = False
+    # we'll assume that the pot didn't move
+    trim_pot_changed = False
 
-        # read the analog pin
-        trim_pot = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
+    # read the analog pin
+    trim_pot = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
 	print trim_pot
-	temp_get(trim_pot)
+	print c_to_f(temp_get(trim_pot))
 
         # hang out and do nothing for a half second
         time.sleep(0.5)
