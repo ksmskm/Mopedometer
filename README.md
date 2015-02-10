@@ -8,7 +8,9 @@ Exhaust Gas Temp. sensor, display & logging is working.
 
 TODO list:
 0. integrating a thermistor to monitor cylinder head temp. requires logarthmic curve tuning in software & an analog to digital converter integrated circuit.
+
 1. restructure modules & organize program to run completely of onboard buttons & power switch.
+
 2. beef up data visualization capabilities.
 
 Still heavily wired :(
