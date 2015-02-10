@@ -11,5 +11,5 @@ curs = conn.cursor()
 print("\nEntire database contents:\n")
 for row in curs.execute("SELECT * FROM temps"):
     print(row)
-
+    
 conn.close()

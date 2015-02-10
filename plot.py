@@ -1,6 +1,13 @@
+# creates 'temp.png' by querying 'test.db' with sqlite3
+# 'temp.png' is a picture of an  (x,y) graph of y:temperature & x:time 
+# generated using matplotlib
+#
+# this is a temporary solution to demonstrate
+# the integration of db, graphing and server tools.
+#
 import sqlite3
-import random
 import time
+import random
 import datetime
 
 import numpy as np
