@@ -12,4 +12,11 @@ import Adafruit_GPIO.SPI as SPI
 # Raspberry Pi hardware SPI configuration.
 SPI_PORT   = 0
 SPI_DEVICE = 0
-sensor = MAX31855.MAX31855(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+
+class egt_sensor(MAX31855.MAX31855):
+
+    def __init__(self):
+        super(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+
+    def readTempF():
+        return readTempC * 9.0 / 5.0 + 32.0
