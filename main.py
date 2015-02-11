@@ -1,4 +1,4 @@
-# byte code for convenience/experimentation
+#no byte code for convenience/experimentation
 import sys
 sys.dont_write_bytecode = True
 
