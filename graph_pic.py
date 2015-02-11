@@ -27,7 +27,7 @@ mpl.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-conn = sqlite3.connect('test.db')
+conn = sqlite3.connect('/home/pi/Mopedometer/test.db')
 curs = conn.cursor()
 graphArray = []
 
