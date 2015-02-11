@@ -1,14 +1,23 @@
-# creates 'temp.png' by querying 'test.db' with sqlite3
-# 'temp.png' is a picture of an  (x,y) graph of y:temperature & x:time 
-# generated using matplotlib
+#!/usr/bin/env python
+
+# serves a .png file of a graph from 'test.db' file
 #
 # this is a temporary solution to demonstrate
-# the integration of db, graphing and server tools.
-#
+# the integration of db, graphing and server tools & is being accessed
+# via apache in a cgi-bin/ folder
+
+import cgitb
+cgitb.enable()
+
 import sqlite3
 import time
-import random
+import sys
 import datetime
+
+import os
+import tempfile
+# write matplotlib files to writable directory
+os.environ['MPLCONFIGDIR'] = tempfile.mkdtemp()
 
 import numpy as np
 import matplotlib as mpl
@@ -30,7 +39,7 @@ for row in curs.execute("SELECT * FROM temps"):
     if splitInfo[1] != 'None':
         graphArrayAppend = splitInfo[0] + ',' + splitInfo[1]
     else:
-        graphArrayAppend = splitInfo[0] + ',' + str(random.randint(0, 100))
+        graphArrayAppend = splitInfo[0] + ',' + str(0)
     graphArray.append(graphArrayAppend)
 
 datestamp, value = np.loadtxt(graphArray,delimiter=',', 
@@ -42,4 +51,7 @@ rect = fig.patch
 
 ax1 = fig.add_subplot(1,1,1, axisbg='white')
 plt.plot_date(x=datestamp, y=value, fmt='b-', label = 'value', linewidth=2)
-fig.savefig('temp.png')
+
+# save the plot as a png and output directly to webserver
+print "Content-Type: image/png\n"
+fig.savefig( sys.stdout, format='png' )
