@@ -1,4 +1,4 @@
-# byte code for convenience/experimentation
+# no byte code for convenience/experimentation
 import sys
 sys.dont_write_bytecode = True
 
@@ -24,19 +24,19 @@ class lcd_plate(LCD.Adafruit_CharLCDPlate):
             self.set_color(0.0, 0.0, 0.0)
 
     def up_pressed(self):
-        return self.is_pressed(UP)
+        return self.is_pressed(LCD.UP)
 
     def down_pressed(self):                           
-        return self.is_pressed(DOWN)
+        return self.is_pressed(LCD.DOWN)
 
     def right_pressed(self):
-        return self.is_pressed(RIGHT)
+        return self.is_pressed(LCD.RIGHT)
     
     def left_pressed(self):
-        return self.is_pressed(LEFT)
+        return self.is_pressed(LCD.LEFT)
 
     def select_pressed(self):
-        return self.is_pressed(SELECT)
+        return self.is_pressed(LCD.SELECT)
 
     def displayEGT(self, temp):
         # display clean data & not noise.

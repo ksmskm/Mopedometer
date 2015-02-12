@@ -11,13 +11,11 @@ import thermocouple
 
 lcd_plate   = interface.lcd_plate()   
 egt_sensor  = thermocouple.egt_sensor()
-
-# EGT Overheat point
 setPoint    = 1100
 dbfilename  = '/home/pi/Mopedometer/test.db'
 
 while True:
-    if lcd_plate.up_pressed:  
+    if lcd_plate.up_pressed():  
 
         # Prep db & display
         conn = sqlite3.connect(dbfilename)
@@ -43,7 +41,7 @@ while True:
                 lcd_plate.refresh(.5)
 
             # DOWN button to stop logging.
-            if lcd_plate.down_pressed:
+            if lcd_plate.down_pressed():
                 conn.close()
-                lcd_plate.displayOFF
+                lcd_plate.displayOFF()
                 runLogging = False
