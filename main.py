@@ -9,8 +9,8 @@ import sqlite3
 import interface
 import thermocouple
 
-lcd_plate = interface.lcd_plate()   
-egt       = thermocouple.egt_sensor()
+lcd_plate   = interface.lcd_plate()   
+egt_sensor  = thermocouple.egt_sensor()
 
 # EGT Overheat point
 setPoint    = 1100
@@ -27,7 +27,7 @@ while True:
         # Log & Display Exhaust Gas Temps.            
         runLogging = True                             
         while runLogging:
-            temp = thermocouple.readTempF()
+            temp = egt_sensor.readTempF()
 
             # Query SQL DB 'temps'
             sqlString = "INSERT INTO temps values(datetime('now'), (?))"

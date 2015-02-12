@@ -16,7 +16,7 @@ SPI_DEVICE = 0
 class egt_sensor(MAX31855.MAX31855):
 
     def __init__(self):
-        super(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
+        super(egt_sensor, self).__init__(spi=SPI.SpiDev(SPI_PORT, SPI_DEVICE))
 
-    def readTempF():
-        return readTempC * 9.0 / 5.0 + 32.0
+    def readTempF(self):
+        return self.readTempC() * 9.0 / 5.0 + 32.0

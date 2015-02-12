@@ -25,7 +25,6 @@ import Adafruit_GPIO.I2C as I2C
 import Adafruit_GPIO.MCP230xx as MCP
 import Adafruit_GPIO.PWM as PWM
 
-
 # Commands
 LCD_CLEARDISPLAY        = 0x01
 LCD_RETURNHOME          = 0x02
