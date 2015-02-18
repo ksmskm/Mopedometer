@@ -97,10 +97,6 @@ GPIO.setup(SPICS, GPIO.OUT)
 potentiometer_adc = 0;
 
 while True:
-    # read the analog pin
     trim_pot = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
-	print trim_pot
-	print c_to_f(temp_get(trim_pot))
-
-    # hang out and do nothing for a half second
-    time.sleep(0.5)
+    print c_to_f(temp_get(trim_pot))
+    time.sleep(2.0)
