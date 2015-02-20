@@ -56,12 +56,10 @@ def temp_get(value):
 
     #a, b, & c values from http://www.thermistor.com/calculators.php
     #using curve R (-6.2%/C @ 25C) Mil Ratio X
-    a = 0.002197222470870
-    a = 0.001835569356095
-    b = 0.000161097632222
-    b = 0.000156588791081
-    c = 0.000000125008328
-    c = 0.000000097428660
+    a = 0.001842015011718
+    b = 0.000155250251866
+    c = 0.000000105071059
+
     #Steinhart Hart Equation
     # T = 1/(a + b[ln(ohm)] + c[ln(ohm)]^3)
 
@@ -99,4 +97,4 @@ potentiometer_adc = 0;
 while True:
     trim_pot = readadc(potentiometer_adc, SPICLK, SPIMOSI, SPIMISO, SPICS)
     print c_to_f(temp_get(trim_pot))
-    time.sleep(2.0)
+    time.sleep(4.0)
