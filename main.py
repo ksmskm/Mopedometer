@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-#no byte code for convenience/experimentation
-=======
 #!/usr/bin/env python
 
-# byte code for convenience/experimentation
->>>>>>> refactor
+#no byte code for convenience/experimentation
 import sys
 sys.dont_write_bytecode = True
 
