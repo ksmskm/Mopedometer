@@ -2,10 +2,6 @@
 
 A Raspberry Pi based data display & logger. Relies heavily on Adafruit products & libraries. Primarily designed to gather temperature data on Moped engines.
 
-## Current status
-
-Exhaust Gas Temp. sensor, display, logging & server are working. topics are being worked on as available parts & schedule permit.
-
 ## Current branches
 
 * master: consists of working prototypes for all topics & retains some code that won't be used (cylinder.py will change due a new circuit plan).
