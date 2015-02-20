@@ -8,15 +8,13 @@ Exhaust Gas Temp. sensor, display, logging & server are working. topics are bein
 
 TODO list:
 
-0. integrating a thermistor to monitor cylinder head temp. requires logarithmic curve tuning in software & an analog to digital converter integrated circuit (this step is well underway)
+* integrating a thermistor to monitor cylinder head temp. requires logarithmic curve tuning in software & an analog to digital converter integrated circuit (this step is well underway)
 
-1. restructure modules & organize program to run completely from onboard buttons & power switch.
+* restructure modules & organize program to run completely from onboard buttons & power switch (underway).
 
-2. beef up data visualization capabilities.
+* beef up data visualization capabilities.
 
-3. integrate Realtime-Clock to improve data logging.
-
-Still heavily wired :(
+* integrate Realtime-Clock to improve data logging.
 
 ## Goal
 
