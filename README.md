@@ -10,6 +10,8 @@ A Raspberry Pi based data display & logger. Relies heavily on Adafruit products 
 
 ## TODO list:
 
+* setup RPi as wifi access point for direct connection on the track
+
 * switch from thermistor to an all-digital circuit 
 
 * beef up data visualization capabilities.
