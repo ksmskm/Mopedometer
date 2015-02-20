@@ -6,11 +6,15 @@ A Raspberry Pi based data display & logger. Relies heavily on Adafruit products 
 
 Exhaust Gas Temp. sensor, display, logging & server are working. topics are being worked on as available parts & schedule permit.
 
-TODO list:
+## Current branches
 
-* integrating a thermistor to monitor cylinder head temp. requires logarithmic curve tuning in software & an analog to digital converter integrated circuit (this step is well underway)
+* master: consists of working prototypes for all topics & retains some code that won't be used (cylinder.py will change due a new circuit plan).
 
-* restructure modules & organize program to run completely from onboard buttons & power switch (underway).
+* database: is for developing a more user friendly database format. Ideally, seperate runs will be browsable from the server & some significant db queries will be available. 
+
+## TODO list:
+
+* switch from thermistor to an all-digital circuit 
 
 * beef up data visualization capabilities.
 
@@ -27,3 +31,5 @@ User friendly dash mounted Mopedometer with a minimum of wires (hint: wifi conne
 [Analog-to-Digital resources](https://gist.github.com/ladyada/3151375)
 
 [Display Library](https://learn.adafruit.com/rgb-lcd-shield)
+
+[graphing Library](http://matplotlib.org/)
