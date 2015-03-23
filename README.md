@@ -1,6 +1,6 @@
 # Mopedometer
 
-A Raspberry Pi based data display & logger. Relies heavily on Adafruit products & libraries. Primarily designed to gather temperature data on Moped engines.
+A Raspberry Pi based data display & logger. Relies heavily on Adafruit products & libraries. Primarily designed to gather temperature data on Moped engines. The Design is oriented toward some specifc requests of the client (my cousin) & is currently far ahead of other parts of the project.
 
 ## Current branches
 
